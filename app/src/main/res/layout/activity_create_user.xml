@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/createPasswordText" />
 
     <ImageView
-        android:id="@+id/generateUserAvatar"
+        android:id="@+id/createAvatarImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
@@ -91,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generateUserAvatar" />
+        app:layout_constraintTop_toBottomOf="@+id/createAvatarImageView" />
 
     <Button
         android:id="@+id/createUserButton"
