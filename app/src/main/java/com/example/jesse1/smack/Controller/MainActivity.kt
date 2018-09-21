@@ -18,11 +18,15 @@ import com.example.jesse1.smack.R
 import com.example.jesse1.smack.Services.AuthService
 import com.example.jesse1.smack.Services.UserDataService
 import com.example.jesse1.smack.Utilities.BROADCAST_USER_DATA_CHANGE
+import com.example.jesse1.smack.Utilities.SOCKET_URL
+import io.socket.client.IO
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    val socket = IO.socket(SOCKET_URL)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +37,24 @@ class MainActivity : AppCompatActivity() {
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-        hideKeyboard()
+    }
 
+    override fun onResume() {
         //register broadcast receiver from createuser activity and onyl listen for the specific intent
         LocalBroadcastManager.getInstance(this).registerReceiver(userDataChangeReceiver,
                 IntentFilter(BROADCAST_USER_DATA_CHANGE))
+        socket.connect()
+        super.onResume()
+    }
+
+    override fun onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(userDataChangeReceiver)
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        socket.disconnect()
+        super.onDestroy()
     }
 
     private val userDataChangeReceiver = object: BroadcastReceiver() {
@@ -89,20 +106,19 @@ class MainActivity : AppCompatActivity() {
                         val channelName = nameTextField.text.toString()
                         val channelDesc = descTextField.text.toString()
 
-                        hideKeyboard()
-
-
+                        //send info from client to API (DB)
+                        socket.emit("newChannel", channelName, channelDesc)
                     }
                     .setNegativeButton("Cancel") { dialogInterface, i ->
 
-                        hideKeyboard()
+
                     }
                     .show()
         }
     }
 
     fun sendMsgBtnClicked(view: View) {
-
+        hideKeyboard()
     }
 
     fun hideKeyboard () {
