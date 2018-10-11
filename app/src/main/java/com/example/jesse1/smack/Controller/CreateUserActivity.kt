@@ -79,10 +79,12 @@ class CreateUserActivity : AppCompatActivity() {
                                 }
                             }
                         } else {
+                            println("Test1")
                             errorToast()
                         }
                     }
                 } else {
+                    println("Test")
                     errorToast()
                 }
             }

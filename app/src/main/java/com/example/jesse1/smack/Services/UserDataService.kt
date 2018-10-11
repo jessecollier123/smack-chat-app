@@ -1,6 +1,7 @@
 package com.example.jesse1.smack.Services
 
 import android.graphics.Color
+import com.example.jesse1.smack.Controller.App
 import java.util.*
 
 object UserDataService {
@@ -18,9 +19,9 @@ object UserDataService {
         avatarName = ""
         email = ""
         name = ""
-        AuthService.authToken = ""
-        AuthService.userEmail = ""
-        AuthService.isLoggedIn = false
+        App.prefs.authToken = ""
+        App.prefs.userEmail = ""
+        App.prefs.isLoggedIn = false
     }
 
     //return the color generated to the login flyout(int value)
