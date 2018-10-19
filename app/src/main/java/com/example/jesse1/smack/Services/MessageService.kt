@@ -5,12 +5,14 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.example.jesse1.smack.Controller.App
 import com.example.jesse1.smack.Model.Channel
+import com.example.jesse1.smack.Model.Message
 import com.example.jesse1.smack.Utilities.URL_GET_CHANNELS
 import org.json.JSONException
 
 object MessageService {
     //will hold the channels
     val channels = ArrayList<Channel>()
+    val messages = ArrayList<Message>()
 
     //function to grab the list of channels created (in the API they're in JSON objects)
     fun getChannels(complete: (Boolean) -> Unit) {
