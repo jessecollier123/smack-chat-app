@@ -1,6 +1,5 @@
 package com.example.jesse1.smack.Services
 
-import android.content.Context
 import android.util.Log
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -14,7 +13,7 @@ object MessageService {
     val channels = ArrayList<Channel>()
 
     //function to grab the list of channels created (in the API they're in JSON objects)
-    fun getChannels(context: Context, complete: (Boolean) -> Unit) {
+    fun getChannels(complete: (Boolean) -> Unit) {
 
         val channelsRequest = object : JsonArrayRequest(Method.GET, URL_GET_CHANNELS, null, Response.Listener {response ->
 
